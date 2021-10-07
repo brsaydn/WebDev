@@ -1,0 +1,298 @@
+---------------------------------------------
+Group Selectors
+
+* {                       // * yıldız ile sayfadaki tüm etiketleri seçip CSS değeri verebiliriz.
+
+  }
+  
+P {                      // sayfadaki tüm p etiketleri yani sayfadaki hangi etiketi tümüyle hedef almak istiyorsak
+                            onu seçimini yaparız.
+  }
+  
+div p {                           //sayfada Div altındaki P etiketlerini seçeriz.
+        border: 1px solid blue;     
+      }
+      
+.container div {                      // sayfada container clası altındaki divi veya div'leri seçeriz.
+                  border: 1px solid blue;  
+                }
+                
+.container div.box {                  //container clası altındaki div'lerden clası box olanı seçeriz ([div.box] arada boşluk olmayacak)
+                   border: 1px solid blue;  
+                   }
+                   
+div.box,p {                           //div'lerden clası box olanları ve ayrıca P etiketlerini birlikte seçeriz.
+          border: 1px solid blue;  
+          }
+          
+NOT: 
+div p -> boşluk eklersek altındaki elemanları seçeriz.  div,p -> virgül eklersek sayfadaki tüm div ve p etiketelerini seçeriz.
+
+<style>
+div > p {                         //bir üst elemanı DİV olan tüm P etiketlerini seçeriz.
+        border: 1px solid blue;         
+        }
+</style>
+<body>
+  <div class="container">         
+        <p>paragraf1</p>
+        <p>paragraf2</p>
+          <ul>
+              <p>paragraf3</p>    // div > p nin div p gösteriminden farkı
+          </ul>                   // div > p gösterimi <ul> altındaki P etiketini seçmez.
+</body>
+
+
+ p ~ div {                       //p etiketinden sonra gelen div etiketlerini seçeriz. Fakat aynı seviyede olan etiketler arası  seçi olur.
+        border: 1px solid blue;  
+        }
+        
+ p + div {                        //p etiketinden sonra gelen ilk Div'i seçeriz.
+         border: 1px solid blue;  
+         }
+
+ 
+        
+        
+        
+
+---------------------------------------------
+Attribute Selectors
+-html                                   -css
+<p title ="third paragraph">            p[title] {
+      Lorem ıpsum sit dolor.                      border: 1px solid gray;
+</p>                                              padding: 5px;
+                                                 }
+                                                 
+<p title ="third paragraph">            p[title="forth paragraph"]{
+      Lorem ıpsum sit dolor.                       border: 1px solid gray;
+</p>                                              }
+
+
+--------------------------------------------------------------------------
+
+p[title~="forth"] {                   //~(tilt) işareti ile içerisinde forth geçen P title'larını seçtik.
+                baclground-color: red;
+                }
+               
+a[href^=http]{                        // ^= ile a etiketi olup http ile başlayanları seçimini yaptık.
+                baclground-color: red;
+                }
+                
+a[href="http://www.google.com][target="_blank"]     //Bu gösterim ile hem a etiketine sahip olup href değer yazımdaki gibi olan hemde 
+                {                                     target değer_blank olan nesneyi seçmiş olduk.
+                baclground-color: red;
+                }
+                
+input[type="text"]                                //input lardan tipi text olanların seçimini yapmış olduk.
+                {
+                display:block;
+                width: 150px;
+                baclground-color: red;
+                }
+
+
+
+İkiye ayrılır   1-Pseudo Element    2-Pseud Class
+
+ 1-Pseudo Element 
+ Örneğin bir paragrafın ilk satırı veya ilk kelimesini seçmek için kullanılır. Yani bir elemanın bir parçasını seçmek için kullanılır.
+ 
+ P:: first-line                     //sayfadaki p elemanlarının ilk satırını seçtik.
+              {
+              color: browmn;
+              word-spacing: 2px; //harfler arası boşuk
+              letter-spacing: 1pz; //kelimeler arası boşluk
+              font-wight: bold; 
+              }
+              
+P.about::firs-line    // P etiketlerinden clası about olanın seçimi
+              {
+              }
+              
+P::first-letter     // P etiketlerinde paragrafın ilk harfi.
+
+P::after            //her paragrafın sonuna ekleme yapar.   -> P::before paragrafın
+         {
+         content:"-deneme";
+         }
+       
+2-Pseud Class
+Bir kapsam içerisindeki bir elemanı seçmek için kullanılır.Örn bir <ul> elemanının içerisindekibir <li> elemanını seçmek için.
+
+ul li:first-child                     //ul etiketinin ilk li elemanını seçtik. 
+                {
+                background-color:red;
+                }
+                
+ul li:last-child                    //ul etiketinin son li elemanını seçtik. 
+
+
+ul li: nth-of-type(even)            //(even) çift eleman
+                {
+                background-color:red;
+                }
+                
+ul li: nth-of-type(odd)          //(odd) çift eleman
+                {
+                background-color:blue;
+                }
+
+NOT: even - odd özellikle tablolarda satırları farklı renklendirmek için kullanılır.
+
+---------------------------------------------------------------------------------------------------------------------------------
+Pseudo Selectors
+
+a: link {         //linkin tıklanmamış hali css değerlerini veririz.
+        }
+        
+a: visited {      //visited: a etiketi linkine daha önceden ziyaret edilmişse bu gösterimde verdiğimiz css değerlerini alır.
+           }
+           
+a: hover {      //hover: a etiketi link in üzerine maousle geldiğimizde belirttiğimiz css değerlerini alır.
+         }
+         
+a: active {       //active: a etiketi linkin üzerine maousle tıkladığımızda alacağı şekil için css değerleri.
+          }
+  
+  
+ÖRN:
+
+-html                                                       -css
+<div>                                                       span {                        //div içerisindeki span'ın olduğu bloğu 
+  Lorem ipsum dolor sit amet, constur adibisicing                 display: none;            display:none ile görünmez yaptık.
+  elit. Autem plopcat numguam <span> quas vitae nema              background-color:red;  
+  nostrum nobis id beate </span>                                  padding: 20px;  
+</div>                                                            }
+                                                             div: hover span {            //div içerisindeki span için hover özelliğini
+                                                                  display: block;           kullanarak yazdığımız css kodu ile div üzerine
+                                                                              }             geldiğimizde display:block ile span görünür 
+                                                                                             hale gelecek.
+        
+        
+   
+---------------------------------------------
+
+IDs/Classes
+<head>
+  <style>   //Temiz kod yazımı açısından inline CSS önerilmez.
+  
+  p {                   //bu gösterim ile sayfa üzerindeki bütün P etiketlerini seçeriz.
+      color:red;
+      fontsize: 2px;
+    {
+    
+  .f40 {                // bu gösterimle oluşturduğumuz stili class olarak taşıyabiliriz.
+        font-size: 40px;
+       }
+       
+  .red {
+        color: red;
+       }
+  </style>
+</head>
+<body>
+
+<p> Deneme 1 </p>           --> <p style:"color: blue;"> Deneme1 </p> // inline olarak verilen stil değeri genel olarak verilen değeri ezer.
+                                                                          örneğin; yukarıda tüm p etiketlerine red değeri verdik fakat inline
+                                                                          olarak blue değeri verdiğimiz için P etiketi içindeki text mavi
+                                                                          rengini aldı.
+ 
+<p> Deneme 2 </p>       --> <p class="red f40"> Deneme 2 </p>      // class ile verdiğimiz css değeride genel olarak etiket ile verdiğimiz
+                                                                       css değerini ezer.
+
+<p class="red"> Deneme 3 </p>     
+<p class="red f40"> Deneme 4</p>
+</body>
+</html>
+
+---------------------
+Sayfa içinde NESNE'lere nasıl ulaşırım.
+
+
+P {                 // Etiket olarak CSS      .renk {               //class olarak değer      #header {                 //ID değeri verdiğimiz
+    color: red;        değeri vermek                  color: red;     belirtip, nesnelere              font-size: 30px;   etiketlere erişmek
+  }                                                 }                 atamak                           }                  için # (diez) işareti
+                                                                                                                          kullanırız.
+
+NOT: ID'ler sayfada sadece bir etiket için kullanılır.
+---------------------------
+
+p {
+    font-size : 20px !important;  // !important değerini kullanırsak o değeri en baskın CSS kodu yaparız.
+  }
+  
+---------------------------------------------------------------------------------------------------------
+UYGULAMA:
+  -Tüm kutulara 300 px genişlik
+  -Tüm kutulara border
+  -Box 1:kırmızı Box 2:mavi Box 3:turuncu
+  -Tüm kutuları yan yana getir
+  -Sayfa başlığı yüksekliği 150px arka plan rengi mavi
+  
+  <style>
+      #header {
+                line-height: 150px;  //satırlar arasındaki yüksekliği belirtir.
+                background-color: blue;
+  
+      .box {                      //tüm divlerin ortak özelliklerini box clası altında toplayıp div etiketlerine verdik.
+            width: 300px;
+            height: 300px;
+            border: 1px solid blue;
+            display: inline-block;      //normalde <div> etiketleri tüm satırı kaplar, bunu kaldırmak için display: inline-block CSS
+            }                             kodunu kullanırız. display: inline kullanımında alt alta gelen block elemanları yan yana getirebiliriz
+      #first {                            fakat genişlik-yükseklik veremeyiz. Bunun için inline-block değerini kullanırız.
+              background-color: red;
+              }
+      #second {
+              background-color: blue;
+              }
+      #three {
+              background-color: orange;
+              }
+              
+  </style>
+    <body>
+      <div id="header">               //sadece tek bir nesneyi etkileyecek değerler olduğu için #header değerlerini ID olarak verdik.
+        Game Header
+      </div>
+      
+      <div id="first" class="box">    //her bir box ayrı renk alacağı için renkleri ID ile tanımladık. box div'lerinin ortak özelliklerini
+          Box 1                         ise box classı tanımlayarak nesnelere taşıdık.
+      </div>
+      
+      <div id="second" class="box">
+          Box 2
+      </div>
+      
+      <div id="three" class="box">
+          Box 3
+      </div>
+  
+    </body>
+  
+---------------------------------------------
+  
+//Inherits
+CSS kodlarının kapsamı özelden genele doğrudur.
+Bir etiket için sırasıyla     
+ID
+CLAS
+ETİKET
+BODY
+
+ID İÇİN YAZILAN CSS CLASI EZER CLAS İÇİN YAZILAN ETİKETİ EZER.
+
+Eğer bir üst kapsamdaki CSS kodunun baz alınması isteniyorsa 
+inherit; kodu kullanılır yada bir öğeye yazılan CSS kodunun tümünü ezmesi isteniyorsa
+!important; css kodu kullanılır.
+
+a {
+    color: inherit; //a etiketi color değeri için bir üst kapsayıcı için yazılan css kodlarını baz alır.
+   }
+   
+.orange {
+    color: orange !important;   //.orange clası color değerini bir üst kapsayıcıdan alır.
+        }
+
+---------------------------------------------
